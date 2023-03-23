@@ -1,0 +1,17 @@
+**/__pycache__
+**/.pytest_cache
+**/node_modules
+**/*.db
+**/.DS_Store
+**/.eslintcache
+**/*.h5
+**/.eslintcache
+**/.ipynb_checkpoints
+.vscode
+.idea
+src/lib/model/server/*.p
+settings.env
+*.txt
+**/*.p
+**/*.patch
+**/*.sql
