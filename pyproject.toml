@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "key-bento"
+description = "Key Bento"
+readme = "README.md"
+requires-python = "==3.10.*"
+dependencies = [
+    "requests",
+    'importlib-metadata; python_version<"3.8"',
+]
+version = "1.0.0"
+
+[tool.setuptools.packages.find]
+where = ["core"]

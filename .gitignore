@@ -11,7 +11,7 @@
 .idea
 src/lib/model/server/*.p
 settings.env
-*.txt
 **/*.p
 **/*.patch
 **/*.sql
+build/*
