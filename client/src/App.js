@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
-import Content from './pages/TopContent';
+import Content from './pages/Content';
 import ExplorePage from './pages/ExplorePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';

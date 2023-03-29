@@ -4,11 +4,10 @@ import Container from 'react-bootstrap/Container';
 export default function Greeting(){
 
   const [user, setUser] = useState()
-  const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
-
 
   useEffect(() => {
   (async () => {
+    const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
       const response = await fetch(BASE_API_URL + '/user/1');
       if (response.ok) {
         const user_data = await response.json();
