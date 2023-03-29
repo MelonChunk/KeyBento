@@ -35,3 +35,27 @@
 .Sidebar .nav-item .active {
   background-color: #def;
 }
+
+
+.Content {
+  margin-top: 10px;
+}
+
+.Destination {
+  align-items: start;
+  padding-top: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.Destination:hover {
+  background-color: #f8f8f8;
+}
+
+.Destination a {
+  color: #14c;
+  text-decoration: none;
+}
+
+.Destination a:visited {
+  color: #14c;
+}
