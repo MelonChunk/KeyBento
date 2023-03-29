@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.get("/api/destinations", response_model=List[Destination])
-async def game_getter(
+async def get_destinations(
     request: Request,
 ):  # pylint: disable=unused-argument
 

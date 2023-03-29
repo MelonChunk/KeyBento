@@ -1,23 +1,51 @@
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import Body from '../components/Body';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
 export default function TopContent(){
-  const user = {
-    id: 1,
-    first_name: 'Melon',
-    last_name: 'Chunk'
-  }
+
+  const [user, setUser] = useState()
   const [destinations, setDestinations] = useState()
-  // const destinations = [{id:1, location:'London'}, {id:2, location:'New York'}, {id:3, location:'Berlin'}];
+  const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
+
+  useEffect(() => {
+  (async () => {
+      const response = await fetch(BASE_API_URL + '/api/destinations');
+      if (response.ok) {
+        const destinations = await response.json();
+        setDestinations(destinations);
+      }
+      else {
+        setDestinations(null);
+      }
+      })(); }, []);
+
+  useEffect(() => {
+  (async () => {
+      const response = await fetch(BASE_API_URL + '/user/1');
+      if (response.ok) {
+        const user_data = await response.json();
+        setUser(user_data);
+      }
+      else {
+        setUser(null);
+      }
+      })(); }, []);
+
 
   return (<Body sidebar>
             <Stack>
-              <Container>
+              {user ?
+                <Container>
                 <p>Hello {user.first_name} {user.last_name}, good to see you back!</p>
               </Container>
+                :
+              <Container>
+              <p> No user set</p>
+            </Container>
+            }
               <Container>
                 {destinations === undefined ?
                     <Spinner animation="border"/>
@@ -35,7 +63,6 @@ export default function TopContent(){
                         )})}
                     </ul>
                   }
-                }
                 </>
               }
                 </Container>
