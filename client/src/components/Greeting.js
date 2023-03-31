@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
+import { useApi } from '../contexts/ApiProvider';
 
 export default function Greeting(){
 
   const [user, setUser] = useState()
+  const api = useApi();
 
   useEffect(() => {
   (async () => {
-    const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
-      const response = await fetch(BASE_API_URL + '/user/1');
+      const response = await api.get('/user/1');
       if (response.ok) {
-        const user_data = await response.json();
-        setUser(user_data);
+        setUser(response.body);
       }
       else {
         setUser(null);
       }
-      })(); }, []);
+    })(); }, [api]);
 
 
 
