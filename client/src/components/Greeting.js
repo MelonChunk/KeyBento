@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import { useApi } from '../contexts/ApiProvider';
+import TimeAgo from './TimeAgo';
+
 
 export default function Greeting(){
 
@@ -25,6 +27,7 @@ export default function Greeting(){
     {user ?
         <Container>
         <p>Hello {user.first_name} {user.last_name}, good to see you back!</p>
+        <p>You have been with us since { <TimeAgo isoDate={user.join_date} />}</p>
         </Container>
       :
         <Container>
