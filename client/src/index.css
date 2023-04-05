@@ -40,3 +40,9 @@
 .Content {
   margin-top: 10px;
 }
+
+.More {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: right;
+}

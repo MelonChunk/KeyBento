@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter, Depends
+from sqlalchemy import func
 
 from api.dependencies import get_db, get_settings
 from models import User
@@ -12,14 +13,22 @@ router = APIRouter()
 @router.get("/create_user")
 def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
     if settings.environment == "DEBUG":
-        user = User(first_name="Melon", last_name="Chunk", join_date=datetime.now())
+        user = User(
+            username="MelonChunk",
+            first_name="Melon",
+            last_name="Chunk",
+            join_date=datetime.now(),
+            last_seen=datetime.now(),
+            about_me="Looking for my dream vacation on melon island",
+            avatar_url="https://i.imgur.com/oBPXx0D.png",
+        )
         db.add(user)
         db.commit()
 
 
-@router.get("/user/{user_id}", response_model=Optional[UserSchema])
-def get_user(user_id, db=Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
+@router.get("/user/{username}", response_model=Optional[UserSchema])
+def get_user(username: str, db=Depends(get_db)):
+    user = db.query(User).filter(func.lower(User.username) == username.lower()).first()
     if user:
         user_response = user.to_schema()
     else:

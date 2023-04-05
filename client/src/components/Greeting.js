@@ -11,7 +11,7 @@ export default function Greeting(){
 
   useEffect(() => {
   (async () => {
-      const response = await api.get('/user/1');
+      const response = await api.get('/user/MelonChunk');
       if (response.ok) {
         setUser(response.body);
       }

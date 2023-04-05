@@ -7,9 +7,13 @@ class User(Base):
 
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
+    username = Column(String)
     first_name = Column(String)
     last_name = Column(String)
     join_date = Column(DateTime)
+    last_seen = Column(DateTime)
+    about_me = Column(String)
+    avatar_url = Column(String)
 
     def __repr__(self):
         return f"User({self.id}, {self.first_name}, {self.last_name})"
@@ -21,4 +25,8 @@ class User(Base):
             first_name=self.first_name,
             last_name=self.last_name,
             join_date=self.join_date,
+            username=self.username,
+            last_seen=self.last_seen,
+            about_me=self.about_me,
+            avatar_url=self.avatar_url,
         )

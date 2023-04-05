@@ -1,10 +1,11 @@
 import Body from '../components/Body';
+import Destinations from '../components/Destinations'
+
 
 export default function ExplorePage() {
   return (
     <Body sidebar>
-      <h1>Explore</h1>
-      <p>TODO</p>
+      <Destinations content='explore' limit={5}/>
     </Body>
   );
 }

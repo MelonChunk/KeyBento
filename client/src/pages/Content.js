@@ -8,7 +8,7 @@ export default function Content(){
   return (<Body sidebar>
             <Stack>
               <Greeting />
-              <Destinations />
+              <Destinations limit={10}/>
              </Stack>
            </Body>
   );
