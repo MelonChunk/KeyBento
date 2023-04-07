@@ -1,3 +1,5 @@
+from typing import Optional
+
 from datetime import datetime
 from pydantic import BaseModel
 
@@ -10,8 +12,8 @@ class UserSchema(BaseModel):
     last_name: str
     join_date: datetime
     last_seen: datetime
-    about_me: str
-    avatar_url: str
+    about_me: Optional[str]
+    avatar_url: Optional[str]
 
 
 class CreateUserSchema(BaseModel):

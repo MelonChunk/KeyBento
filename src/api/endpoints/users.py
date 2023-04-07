@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import func
 
 from api.dependencies import get_db, get_settings
+from api.endpoints.authentication import get_password_hash
 from models import User
 from schemas import UserSchema, CreateUserSchema
 
@@ -14,7 +15,8 @@ router = APIRouter()
 def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
     if settings.environment == "DEBUG":
         user = User(
-            username="MelonChunk",
+            username="melonchunk",
+            hashed_password=get_password_hash("password"),
             first_name="Melon",
             last_name="Chunk",
             join_date=datetime.now(),

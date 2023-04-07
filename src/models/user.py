@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, Boolean
 from models.base import Base
 from schemas import UserSchema, CreateUserSchema
 
@@ -9,13 +9,14 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     email = Column(String)
-    password = Column(String)
+    hashed_password = Column(String)
     first_name = Column(String)
     last_name = Column(String)
     join_date = Column(DateTime)
     last_seen = Column(DateTime)
     about_me = Column(String)
     avatar_url = Column(String)
+    disabled = Column(Boolean, default=False)
 
     def __repr__(self):
         return f"User({self.id}, {self.first_name}, {self.last_name})"
