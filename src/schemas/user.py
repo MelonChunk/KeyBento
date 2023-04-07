@@ -12,3 +12,9 @@ class UserSchema(BaseModel):
     last_seen: datetime
     about_me: str
     avatar_url: str
+
+
+class CreateUserSchema(BaseModel):
+    username: str
+    email: str
+    password: str

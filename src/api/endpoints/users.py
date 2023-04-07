@@ -5,7 +5,7 @@ from sqlalchemy import func
 
 from api.dependencies import get_db, get_settings
 from models import User
-from schemas import UserSchema
+from schemas import UserSchema, CreateUserSchema
 
 router = APIRouter()
 
@@ -24,6 +24,13 @@ def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
         )
         db.add(user)
         db.commit()
+
+
+@router.post("/register_user")
+def register_user(new_user: CreateUserSchema, db=Depends(get_db)):
+    user = User.create(new_user)
+    db.add(user)
+    db.commit()
 
 
 @router.get("/user/{username}", response_model=Optional[UserSchema])
