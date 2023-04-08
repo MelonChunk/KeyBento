@@ -1,26 +1,10 @@
-import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import { useApi } from '../contexts/ApiProvider';
 import TimeAgo from './TimeAgo';
-
+import { useUser } from '../contexts/UserProvider';
 
 export default function Greeting(){
 
-  const [user, setUser] = useState()
-  const api = useApi();
-
-  useEffect(() => {
-  (async () => {
-      const response = await api.get('/user/MelonChunk');
-      if (response.ok) {
-        setUser(response.body);
-      }
-      else {
-        setUser(null);
-      }
-    })(); }, [api]);
-
-
+  const { user } = useUser();
 
   return (
     <>

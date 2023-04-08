@@ -3,8 +3,9 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
 
-    SECRET_KEY: str = "585a9ebe882df806e3ce9dd75c7d2317a997c8178d1f4818a27376603a0aea56"
-    ACCESS_TOKEN_EXPIRE_MINUTES: str = 10080
+    SECRET_KEY: str = "0093c877c19ce8d77da13dbda7f77c94a75ef89c6459e126dbf9709d5af870cd"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15  # 60*24*70
 
     class Config:
         case_sensitive = True

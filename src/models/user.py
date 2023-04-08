@@ -1,3 +1,7 @@
+from datetime import datetime
+import urllib
+import hashlib
+
 from sqlalchemy import Column, String, Integer, DateTime, Boolean
 from models.base import Base
 from schemas import UserSchema, CreateUserSchema
@@ -34,6 +38,28 @@ class User(Base):
             avatar_url=self.avatar_url,
         )
 
+    @staticmethod
+    def generate_gravatar_url(email):
+        size = 40
+        gravatar_url = (
+            "https://www.gravatar.com/avatar/"
+            + hashlib.md5(email.lower().encode("utf-8")).hexdigest()
+            + "?"
+        )
+        gravatar_url += urllib.parse.urlencode({"s": str(size)})
+        return gravatar_url
+
     @classmethod
     def create(cls, user: CreateUserSchema):
-        return cls(username=user.username, password=user.password, email=user.email)
+        from api.dependencies.authentication import get_password_hash
+
+        return cls(
+            username=user.username,
+            hashed_password=get_password_hash(user.password),
+            email=user.email,
+            avatar_url=cls.generate_gravatar_url(user.email),
+            join_date=datetime.now(),
+            last_seen=datetime.now(),
+            first_name=user.first_name,
+            last_name=user.last_name,
+        )

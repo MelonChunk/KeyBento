@@ -10,6 +10,8 @@ import { useFlash } from '../contexts/FlashProvider';
 export default function RegistrationPage() {
   const [formErrors, setFormErrors] = useState({});
   const usernameField = useRef();
+  const firstnameField = useRef();
+  const lastnameField = useRef();
   const emailField = useRef();
   const passwordField = useRef();
   const password2Field = useRef();
@@ -30,11 +32,13 @@ export default function RegistrationPage() {
     else {
       const data = await api.post('/register_user', {
         username: usernameField.current.value,
+        first_name: firstnameField.current.value,
+        last_name: lastnameField.current.value,
         email: emailField.current.value,
         password: passwordField.current.value
       });
       if (!data.ok) {
-        setFormErrors(data.body.errors.json);
+        setFormErrors(data.body.errors);
       }
       else {
         setFormErrors({});
@@ -51,6 +55,12 @@ export default function RegistrationPage() {
         <InputField
           name="username" label="Username"
           error={formErrors.username} fieldRef={usernameField} />
+        <InputField
+          name="firstname" label="First Name"
+          error={formErrors.firstname} fieldRef={firstnameField} />
+        <InputField
+          name="lastname" label="Last Name"
+          error={formErrors.lastname} fieldRef={lastnameField} />
         <InputField
           name="email" label="Email address"
           error={formErrors.email} fieldRef={emailField} />

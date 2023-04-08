@@ -46,3 +46,16 @@
   margin-bottom: 10px;
   text-align: right;
 }
+
+.Sidebar a, .dropdown-item, .dropdown-item.active {
+  color: #444;
+}
+
+.Sidebar .nav-item .active, .dropdown-item.active {
+  background-color: #def;
+}
+
+.NavDropdown {
+  background-color: #444;
+  color: #def;
+}
