@@ -2,7 +2,9 @@ from datetime import datetime
 import urllib
 import hashlib
 
-from sqlalchemy import Column, String, Integer, DateTime, Boolean
+from sqlalchemy import Column, String, Integer, DateTime, Boolean, func
+from sqlalchemy.orm import relationship
+
 from models.base import Base
 from schemas import UserSchema, CreateUserSchema
 
@@ -21,6 +23,13 @@ class User(Base):
     about_me = Column(String)
     avatar_url = Column(String)
     disabled = Column(Boolean, default=False)
+
+    properties = relationship("Property", uselist=True)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(
+        DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now()
+    )
 
     def __repr__(self):
         return f"User({self.id}, {self.first_name}, {self.last_name})"

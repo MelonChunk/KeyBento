@@ -5,7 +5,11 @@ export default function Destination({ destination }) {
   return (
     <>
       <Stack direction="horizontal" gap={3} className="Post">
-        <li>{destination.location}</li>
+        <li>
+        {destination.type} in {destination.city}, {destination.country}
+        <br/>
+        {destination.description}
+        </li>
         <Image src={null} alt={destination.location} roundedCircle />
       </Stack >
     </>

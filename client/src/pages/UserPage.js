@@ -44,7 +44,7 @@ export default function UserPage() {
               </div>
               <Stack>
               <p>Your properties</p>
-              <Destinations content={user.username} limit={3} />
+              <Destinations content={user.username} add limit={3} />
               </Stack>
             </Stack>
           }

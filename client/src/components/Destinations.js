@@ -4,8 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Destination from './Destination';
 import { useApi } from '../contexts/ApiProvider';
 import More from './More';
+import AddProperty from './AddProperty';
 
-export default function Destinations({content, limit=3}){
+export default function Destinations({content, add, limit=3}){
 
   const [destinations, setDestinations] = useState()
   const [pagination, setPagination] = useState();
@@ -20,9 +21,13 @@ export default function Destinations({content, limit=3}){
       url = '/destinations';
       break
     default:
-      url = `/userdestinations/${content}`;
+      url = `/userdestinations`;
       break;
   }
+
+  const showProperty = (newProperty) => {
+    setDestinations([newProperty, ...destinations]);
+  };
 
 
   useEffect(() => {
@@ -56,6 +61,7 @@ export default function Destinations({content, limit=3}){
             <Spinner animation="border"/>
         :
         <>
+          {add && <AddProperty showProperty={showProperty} />}
           {destinations.length === 0 ?
               <p> Unfortunately, no more destinations are currently available </p>
             :

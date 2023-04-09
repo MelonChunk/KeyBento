@@ -3,6 +3,7 @@ cryptography==40.0.1
 fastapi==0.95.0
 passlib==1.7.4
 pre-commit
+pydantic-factories==1.17.3
 pytest
 python-jose==3.3.0
 python-multipart==0.0.6
