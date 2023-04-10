@@ -21,7 +21,7 @@ export default function Destinations({content, add, showOwner, limit=3}){
       url = '/destinations';
       break
     default:
-      url = `/userdestinations`;
+      url = `/userdestinations/`+content;
       break;
   }
 

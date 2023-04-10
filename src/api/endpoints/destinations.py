@@ -4,6 +4,7 @@ from sqlalchemy import desc
 
 from schemas.destinations import DestinationResponse, Destination, CreateProperty, removeProperty
 from schemas.pagination import Pagination
+from models.user import User
 from models.properties import Property
 from api.dependencies import get_current_user, get_db
 
@@ -33,14 +34,20 @@ async def get_destinations(
     return DestinationResponse(destinations=to_send_destinations, pagination=pagination)
 
 
-@router.get("/userdestinations", response_model=DestinationResponse)
+@router.get("/userdestinations/{username}", response_model=DestinationResponse)
 async def get_destinations_for_user(
+    username: str,
     limit: int = 3,
     offset: int = 0,
-    user=Depends(get_current_user),
+    db=Depends(get_db),
 ):
-    destinations = [Destination.from_db_obj(des) for des in user.properties]
-    to_send_destinations = destinations[offset: (offset + limit)]
+    user = db.query(User).filter(User.username == username).first()
+    if user:
+        destinations = [Destination.from_db_obj(des) for des in user.properties]
+        to_send_destinations = destinations[offset: (offset + limit)]
+    else:
+        destinations = []
+        to_send_destinations = []
     pagination = Pagination(
         count=len(to_send_destinations),
         offset=offset,

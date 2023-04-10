@@ -15,7 +15,6 @@ def get_user_by_name(username: str, db=Depends(get_db)):
     user = db.query(User).filter(func.lower(User.username) == username.lower()).first()
     if user:
         return user.to_schema()
-
     return None
 
 
