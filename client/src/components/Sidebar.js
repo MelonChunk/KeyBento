@@ -17,7 +17,9 @@ export default function Sidebar() {
       <Nav.Item>
         <Nav.Link as={NavLink} to={'/user/' + user.username}>Profile</Nav.Link>
       </Nav.Item>
-      <Nav.Item onClick={logout}> Logout </Nav.Item>
+      <Nav.Item onClick={logout}>
+        <Nav.Link as={NavLink} to={'/login'}> Logout </Nav.Link>
+      </Nav.Item>
     </Navbar>
   );
 }

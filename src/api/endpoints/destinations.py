@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from sqlalchemy import desc
 
-from schemas.destinations import DestinationResponse, Destination, CreateProperty
+from schemas.destinations import DestinationResponse, Destination, CreateProperty, removeProperty
 from schemas.pagination import Pagination
 from models.properties import Property
 from api.dependencies import get_current_user, get_db
@@ -60,3 +60,12 @@ async def create_new_property(
     db.add(property)
     db.commit()
     return Destination.from_db_obj(property)
+
+
+@router.post("/remove_property")
+async def delete_property(
+    remove_property: removeProperty, db=Depends(get_db)
+):
+    db.query(Property).filter(Property.id == remove_property.id).delete()
+    db.commit()
+    return True

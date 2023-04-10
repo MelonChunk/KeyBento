@@ -42,3 +42,7 @@ class CreateProperty(BaseModel):
     description: str
     type: str
     address: str
+
+
+class removeProperty(BaseModel):
+    id: int
