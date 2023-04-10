@@ -1,7 +1,9 @@
 from datetime import datetime
+from random import choice
 from typing import Any
 from fastapi import APIRouter, Depends
 from pydantic_factories import ModelFactory
+
 
 from api.dependencies import get_db, get_settings
 from api.dependencies.authentication import get_password_hash
@@ -22,6 +24,11 @@ class PropertyFactory(ModelFactory[Any]):
     __model__ = CreateProperty
 
 
+city_countries = [('Berlin', 'Germany'), ('New York', 'USA'), ('London', 'England'), ('Wellington', 'New Zealand'), ('Madrid', 'Spain'), ('Paris', 'France')]
+descriptions = ['Nice and cosy place', 'In the middle of the city', 'Lots of restaurants', 'Close to the zoo']
+usernames = ['Dick', 'Tom', 'Harry']
+
+
 @router.get("/create_all")
 def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
     if settings.environment == "DEBUG":
@@ -38,8 +45,10 @@ def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
         db.add(melon)
         db.commit()
 
-        melons_props = PropertyFactory.batch(3)
-        for prop in melons_props:
+        for _ in range(3):
+            city_country = choice(city_countries)
+            description = choice(descriptions)
+            prop = PropertyFactory.build(type=choice(['Flat', 'House']), city=city_country[0], country=city_country[1], description=description)
             prop = Property.create(prop)
             prop.owner = melon
             db.add(prop)
@@ -58,12 +67,15 @@ def create_test_user(settings=Depends(get_settings), db=Depends(get_db)):
         db.add(leroy)
         db.commit()
 
-        properties = PropertyFactory.batch(12)
-        for prop in properties:
-            user_schema = UserFactory.build()
+        for prop in range(12):
+
+            user_schema = UserFactory.build(username=choice(usernames))
             user = User.create(user_schema)
             db.add(user)
             db.commit()
+            city_country = choice(city_countries)
+            description = choice(descriptions)
+            prop = PropertyFactory.build(type=choice(['Flat', 'House']), city=city_country[0], country=city_country[1], description=description)
             prop = Property.create(prop)
             prop.owner = user
             db.add(prop)

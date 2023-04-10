@@ -6,7 +6,7 @@ import { useApi } from '../contexts/ApiProvider';
 import More from './More';
 import AddProperty from './AddProperty';
 
-export default function Destinations({content, add, limit=3}){
+export default function Destinations({content, add, showOwner, limit=3}){
 
   const [destinations, setDestinations] = useState()
   const [pagination, setPagination] = useState();
@@ -42,7 +42,7 @@ export default function Destinations({content, add, limit=3}){
         setPagination(null);
       }
     })();
-  }, [api, url]);
+  }, [api, url, limit]);
 
 
   const loadNextPage = async () => {
@@ -65,7 +65,7 @@ export default function Destinations({content, add, limit=3}){
           {destinations.length === 0 ?
               <p> Unfortunately, no more destinations are currently available </p>
             :
-            <ul>{destinations.map(destination => <Destination key={destination.id} destination={destination}/>)}</ul>
+            <ul>{destinations.map(destination => <Destination key={destination.id} destination={destination} showOwner={showOwner}/>)}</ul>
           }
           <More pagination={pagination} loadNextPage={loadNextPage} />
         </>
