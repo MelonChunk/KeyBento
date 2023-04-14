@@ -18,13 +18,15 @@ class User(Base):
     hashed_password = Column(String)
     first_name = Column(String)
     last_name = Column(String)
-    join_date = Column(DateTime)
     last_seen = Column(DateTime)
+    phone_number = Column(String)
     about_me = Column(String)
     avatar_url = Column(String)
     disabled = Column(Boolean, default=False)
 
     properties = relationship("Property", uselist=True)
+    availabilities = relationship("Availability", uselist=True)
+    city_interests = relationship("CityInterest", uselist=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(
@@ -40,9 +42,9 @@ class User(Base):
             id=self.id,
             first_name=self.first_name,
             last_name=self.last_name,
-            join_date=self.join_date,
             username=self.username,
             last_seen=self.last_seen,
+            join_date=self.created_at,
             about_me=self.about_me,
             avatar_url=self.avatar_url,
         )
@@ -67,7 +69,6 @@ class User(Base):
             hashed_password=get_password_hash(user.password),
             email=user.email,
             avatar_url=cls.generate_gravatar_url(user.email),
-            join_date=datetime.now(),
             last_seen=datetime.now(),
             first_name=user.first_name,
             last_name=user.last_name,

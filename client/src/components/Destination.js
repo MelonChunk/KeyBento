@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import Image from 'react-bootstrap/Image';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,7 @@ import { useApi } from '../contexts/ApiProvider';
 import { useFlash } from '../contexts/FlashProvider';
 import { useUser } from '../contexts/UserProvider';
 
-export default function Destination({ destination, showOwner }) {
+export default memo(function Destination({ destination, showOwner }) {
   const api = useApi();
   const flash = useFlash();
   const { user: loggedInUser } = useUser();
@@ -47,4 +47,4 @@ export default function Destination({ destination, showOwner }) {
       </Stack >
     </>
   );
-}
+});

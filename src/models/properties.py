@@ -24,7 +24,7 @@ class Property(Base):
     )
 
     def __repr__(self):
-        return f"Property({self.id}, {self.city}, {self.country}, {self.location})"
+        return f"Property({self.id}, {self.city}, {self.country}, {self.description})"
 
     @classmethod
     def create(cls, schema):

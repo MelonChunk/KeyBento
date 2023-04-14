@@ -1,7 +1,8 @@
 const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 export default class ApiClient {
-  constructor() {
+  constructor(onError) {
+    this.onError = onError;
     this.base_url =  BASE_API_URL ;
   }
 
@@ -11,6 +12,9 @@ export default class ApiClient {
       const refreshResponse = await this.put('/tokens', {
         access_token: localStorage.getItem('accessToken'),
       });
+      if (response.status >= 500 && this.onError) {
+        this.onError(response);
+      }
       if (refreshResponse.ok) {
         localStorage.setItem('accessToken', refreshResponse.body.access_token);
         response = await this.requestInternal(options);
