@@ -46,8 +46,8 @@ export default function UserPage() {
                 </p>
               </div>
               <Stack>
-              {profileUser.username == loggedInUser.username ? <p>Your properties</p> : <p>{username}'s propertie(s)</p>}
-              <Destinations content={username} add={profileUser.username == loggedInUser.username} limit={3} />
+              {profileUser.username === loggedInUser.username ? <p>Your properties</p> : <p>{username}'s propertie(s)</p>}
+              <Destinations content={username} add={profileUser.username === loggedInUser.username} limit={3} />
               </Stack>
             </Stack>
           }

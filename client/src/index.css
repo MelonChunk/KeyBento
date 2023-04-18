@@ -69,3 +69,19 @@
 .Write form {
   width: 100%;
 }
+
+.Bento {
+  border: '2px solid black';
+  borderBottomLeftRadius: '20px';
+  borderBottomRightRadius: '20px';
+  borderTopLeftRadius: '20px';
+  borderTopRightRadius: '20px';
+}
+
+.Destination {
+  margin: 10px 0 0 50px;
+}
+
+li{
+  margin: 30px 5;
+}
