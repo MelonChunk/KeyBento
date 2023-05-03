@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
 import Destinations from '../components/Destinations'
+import Calendar from '../components/Calendar'
 import { useUser } from '../contexts/UserProvider';
 import { useApi } from '../contexts/ApiProvider';
 
@@ -35,6 +36,7 @@ export default function UserPage() {
             <p>User not found.</p>
           :
             <Stack direction="horizontal" gap={4}>
+              <Stack direction="vertical">
               <Image src={profileUser.avatar_url + '&s=128'} roundedCircle />
               <div>
                 <h1>{profileUser.username}</h1>
@@ -45,6 +47,8 @@ export default function UserPage() {
                   Last seen: <TimeAgo isoDate={profileUser.last_seen} />
                 </p>
               </div>
+              <Calendar/>
+              </Stack>
               <Stack>
               {profileUser.username === loggedInUser.username ? <p>Your properties</p> : <p>{username}'s propertie(s)</p>}
               <Destinations content={username} add={profileUser.username === loggedInUser.username} limit={3} />

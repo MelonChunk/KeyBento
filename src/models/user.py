@@ -26,6 +26,7 @@ class User(Base):
 
     properties = relationship("Property", uselist=True)
     availabilities = relationship("Availability", uselist=True)
+    availability_intervals = relationship("AvailabilityInterval", uselist=True)
     city_interests = relationship("CityInterest", uselist=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
