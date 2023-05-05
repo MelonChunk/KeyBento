@@ -85,3 +85,7 @@
 li{
   margin: 30px 5;
 }
+
+.custom-date-range-picker .rdrDateRangeWrapper .rdrDateDisplayWrapper:first-child {
+  display: none;
+}

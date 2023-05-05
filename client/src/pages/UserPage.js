@@ -6,7 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
 import Destinations from '../components/Destinations'
-import Calendar from '../components/Calendar'
+import KeyCalendar from '../components/KeyCalendar'
 import { useUser } from '../contexts/UserProvider';
 import { useApi } from '../contexts/ApiProvider';
 
@@ -47,7 +47,7 @@ export default function UserPage() {
                   Last seen: <TimeAgo isoDate={profileUser.last_seen} />
                 </p>
               </div>
-              <Calendar/>
+              <KeyCalendar/>
               </Stack>
               <Stack>
               {profileUser.username === loggedInUser.username ? <p>Your properties</p> : <p>{username}'s propertie(s)</p>}

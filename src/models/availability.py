@@ -1,6 +1,7 @@
 from dateutil.parser import parse
 from sqlalchemy import Column, String, Integer, DateTime, Boolean, ForeignKey, func
 from sqlalchemy.orm import relationship
+from schemas.availabilities import AddAvailabilityRange
 
 from models.base import Base
 
@@ -42,3 +43,10 @@ class AvailabilityInterval(Base):
     @classmethod
     def create(cls, schema):
         return cls(start_date=parse(schema.startDate), end_date=parse(schema.endDate))
+
+    def to_schema(self):
+        return AddAvailabilityRange(
+            startDate=self.start_date.isoformat(),
+            endDate=self.end_date.isoformat(),
+            key=1,
+        )
