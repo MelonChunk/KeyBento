@@ -1,5 +1,4 @@
 from datetime import timedelta
-from typing import Annotated
 
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends
@@ -18,7 +17,7 @@ class Token(BaseModel):
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    form_data: OAuth2PasswordRequestForm = Depends(),
     settings=Depends(get_settings),
     db=Depends(get_db),
 ):

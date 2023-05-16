@@ -1,5 +1,5 @@
 api-up:
-	uvicorn src.api.main:app --reload --port 8001
+	uvicorn src.main:app --reload --port 8001
 
 frontend-up:
 	npm start --prefix client

@@ -64,6 +64,7 @@ export default class ApiClient {
 
 
   async login(username, password) {
+    console.log('Trying login');
     var formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
@@ -77,7 +78,9 @@ export default class ApiClient {
       return response.status === 401 ? 'fail' : 'error';
     }
     const token_data = await response.json();
+    console.log(token_data);
     localStorage.setItem('accessToken', token_data.access_token);
+    console.log(localStorage.getItem('accessToken'));
     return 'ok';
   }
 
