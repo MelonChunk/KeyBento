@@ -56,7 +56,6 @@ async def get_current_user(
     db=Depends(get_db),
     settings=Depends(get_settings),
 ):
-
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
