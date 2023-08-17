@@ -9,6 +9,7 @@ from api.endpoints import (
     registration,
     initialise,
     availabilities,
+    notification_of_interest,
 )
 
 app = FastAPI()
@@ -27,6 +28,7 @@ app.include_router(authentication.router)
 app.include_router(registration.router)
 app.include_router(initialise.router)
 app.include_router(availabilities.router)
+app.include_router(notification_of_interest.router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8001)
